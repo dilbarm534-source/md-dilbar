@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CampusFix Plus</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #f3f6fb;
+      color: #172033;
+    }
+
+    header {
+      background: linear-gradient(135deg, #172554, #2563eb);
+      color: white;
+      padding: 25px 8%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    header h1 {
+      font-size: 28px;
+    }
+
+    header p {
+      margin-top: 6px;
+      color: #dbeafe;
+    }
+
+    .admin-btn {
+      border: none;
+      background: white;
+      color: #1d4ed8;
+      padding: 11px 18px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1150px;
+      margin: 28px auto;
+    }
+
+    .hero {
+      background: white;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 5px 20px #dce3f0;
+      margin-bottom: 25px;
+    }
+
+    .hero h2 {
+      margin-bottom: 10px;
+      color: #1e3a8a;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+      margin-bottom: 25px;
+    }
+
+    .stat {
+      background: white;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 4px 15px #dce3f0;
+    }
+
+    .stat h3 {
+      font-size: 28px;
+      color: #2563eb;
+      margin-bottom: 5px;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 25px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 15px;
+      padding: 23px;
+      box-shadow: 0 5px 20px #dce3f0;
+    }
+
+    .card h2 {
+      margin-bottom: 18px;
+      color: #1e3a8a;
+    }
+
+    label {
+      display: block;
+      margin-top: 13px;
+      margin-bottom: 6px;
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 11px;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      outline: none;
+    }
+
+    textarea {
+      height: 90px;
+      resize: vertical;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: #2563eb;
+    }
+
+    .submit-btn {
+      width: 100%;
+      margin-top: 18px;
+      padding: 13px;
+      border: none;
+      border-radius: 8px;
+      background: #2563eb;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .submit-btn:hover {
+      background: #1d4ed8;
+    }
+
+    .complaint {
+      border: 1px solid #e2e8f0;
+      border-left: 5px solid #2563eb;
+      padding: 15px;
+      margin-bottom: 13px;
+      border-radius: 8px;
+      background: #f8fafc;
+    }
+
+    .complaint h3 {
+      color: #1e3a8a;
+      margin-bottom: 7px;
+    }
+
+    .complaint p {
+      margin: 6px 0;
+      font-size: 14px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 5px 9px;
+      font-size: 12px;
+      border-radius: 15px;
+      font-weight: bold;
+      margin-top: 7px;
+    }
+
+    .pending {
+      background: #fef3c7;
+      color: #92400e;
+    }
+
+    .progress {
+      background: #dbeafe;
+      color: #1e40af;
+    }
+
+    .resolved {
+      background: #dcfce7;
+      color: #166534;
+    }
+
+    .empty {
+      color: #64748b;
+      text-align: center;
+      padding: 30px 5px;
+    }
+
+    .admin-panel {
+      display: none;
+      margin-top: 25px;
+    }
+
+    .admin-panel h2 {
+      color: #991b1b;
+    }
+
+    .admin-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+      flex-wrap: wrap;
+      border-bottom: 1px solid #e2e8f0;
+      padding: 15px 0;
+    }
+
+    .admin-item select {
+      width: 170px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px;
+      color: #64748b;
+    }
+
+    @media (max-width: 800px) {
+      .layout, .stats {
+        grid-template-columns: 1fr;
+      }
+
+      header {
+        padding: 22px 5%;
+      }
+
+      .container {
+        width: 94%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div>
+      <h1>CampusFix Plus</h1>
+      <p>Report. Track. Resolve.</p>
+    </div>
+    <button class="admin-btn" onclick="openAdmin()">Admin Dashboard</button>
+  </header>
+
+  <main class="container">
+
+    <section class="hero">
+      <h2>College Problems ka Smart Solution</h2>
+      <p>
+        Mess food, hostel, classroom, electricity, cleanliness aur Wi-Fi
+        se related complaints yahan report karein.
+      </p>
+    </section>
+
+    <section class="stats">
+      <div class="stat">
+        <h3 id="totalCount">0</h3>
+        <p>Total Complaints</p>
+      </div>
+
+      <div class="stat">
+        <h3 id="pendingCount">0</h3>
+        <p>Pending</p>
+      </div>
+
+      <div class="stat">
+        <h3 id="progressCount">0</h3>
+        <p>In Progress</p>
+      </div>
+
+      <div class="stat">
+        <h3 id="resolvedCount">0</h3>
+        <p>Resolved</p>
+      </div>
+    </section>
+
+    <section class="layout">
+
+      <div class="card">
+        <h2>New Complaint Report Karein</h2>
+
+        <form id="complaintForm">
+
+          <label>Student Name</label>
+          <input type="text" id="studentName" placeholder="Apna naam likhein" required>
+
+          <label>Room / Roll Number</label>
+          <input type="text" id="studentId" placeholder="Jaise: B-204 / 101" required>
+
+          <label>Complaint Category</label>
+          <select id="category" required>
+            <option value="">Category select karein</option>
+            <option value="Mess Food">Mess Food</option>
+            <option value="Hostel">Hostel Problem</option>
+            <option value="Cleanliness">Cleanliness</option>
+            <option value="Electricity">Electricity</option>
+            <option value="Wi-Fi">Wi-Fi</option>
+            <option value="Classroom">Classroom</option>
+            <option value="Other">Other</option>
+          </select>
+
+          <label>Location</label>
+          <input type="text" id="location" placeholder="Jaise: Hostel Block A / Main Mess" required>
+
+          <label>Problem Title</label>
+          <input type="text" id="title" placeholder="Problem ka short title" required>
+
+          <label>Problem Description</label>
+          <textarea id="description" placeholder="Problem ko detail mein likhein..." required></textarea>
+
+          <label>Priority</label>
+          <select id="priority">
+            <option value="Normal">Normal</option>
+            <option value="High">High</option>
+            <option value="Emergency">Emergency</option>
+          </select>
+
+          <button class="submit-btn" type="submit">
+            Complaint Submit Karein
+          </button>
+        </form>
+      </div>
+
+      <div class="card">
+        <h2>Recent Complaints</h2>
+        <div id="complaintList"></div>
+      </div>
+
+    </section>
+
+    <section class="card admin-panel" id="adminPanel">
+      <h2>Admin Dashboard</h2>
+      <p style="margin-bottom: 15px;">
+        Yahan se complaint ka status update karein.
+      </p>
+      <div id="adminList"></div>
+    </section>
+
+  </main>
+
+  <footer>
+    CampusFix Plus © 2025 | Made for Better Campus Life
+  </footer>
+
+  <script>
+    let complaints = JSON.parse(localStorage.getItem("complaints")) || [];
+
+    const form = document.getElementById("complaintForm");
+    const complaintList = document.getElementById("complaintList");
+    const adminList = document.getElementById("adminList");
+
+    form.addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      const complaint = {
+        id: Date.now(),
+        studentName: document.getElementById("studentName").value,
+        studentId: document.getElementById("studentId").value,
+        category: document.getElementById("category").value,
+        location: document.getElementById("location").value,
+        title: document.getElementById("title").value,
+        description: document.getElementById("description").value,
+        priority: document.getElementById("priority").value,
+        status: "Pending",
+        date: new Date().toLocaleString()
+      };
+
+      complaints.unshift(complaint);
+      saveData();
+      form.reset();
+
+      alert("Complaint successfully submit ho gayi!");
+      renderComplaints();
+      renderAdmin();
+    });
+
+    function saveData() {
+      localStorage.setItem("complaints", JSON.stringify(complaints));
+    }
+
+    function getStatusClass(status) {
+      if (status === "Resolved") return "resolved";
+      if (status === "In Progress") return "progress";
+      return "pending";
+    }
+
+    function renderComplaints() {
+      complaintList.innerHTML = "";
+
+      if (complaints.length === 0) {
+        complaintList.innerHTML =
+          '<div class="empty">Abhi koi complaint nahi hai.</div>';
+      }
+
+      complaints.slice(0, 8).forEach(item => {
+        complaintList.innerHTML += `
+          <div class="complaint">
+            <h3>${item.title}</h3>
+            <p><b>Category:</b> ${item.category}</p>
+            <p><b>Location:</b> ${item.location}</p>
+            <p><b>Priority:</b> ${item.priority}</p>
+            <p>${item.description}</p>
+            <small>${item.date}</small><br>
+            <span class="badge ${getStatusClass(item.status)}">
+              ${item.status}
+            </span>
+          </div>
+        `;
+      });
+
+      updateStats();
+    }
+
+    function renderAdmin() {
+      adminList.innerHTML = "";
+
+      if (complaints.length === 0) {
+        adminList.innerHTML =
+          '<div class="empty">Admin ke liye koi complaint nahi hai.</div>';
+      }
+
+      complaints.forEach(item => {
+        adminList.innerHTML += `
+          <div class="admin-item">
+            <div>
+              <b>${item.title}</b>
+              <p>${item.category} | ${item.location}</p>
+              <small>By: ${item.studentName} | ${item.studentId}</small>
+            </div>
+
+            <select onchange="changeStatus(${item.id}, this.value)">
+              <option ${item.status === "Pending" ? "selected" : ""}>
+                Pending
+              </option>
+              <option ${item.status === "In Progress" ? "selected" : ""}>
+                In Progress
+              </option>
+              <option ${item.status === "Resolved" ? "selected" : ""}>
+                Resolved
+              </option>
+            </select>
+          </div>
+        `;
+      });
+    }
+
+    function changeStatus(id, newStatus) {
+      const complaint = complaints.find(item => item.id === id);
+
+      if (complaint) {
+        complaint.status = newStatus;
+        saveData();
+        renderComplaints();
+        renderAdmin();
+      }
+    }
+
+    function openAdmin() {
+      const password = prompt("Admin password enter karein:");
+
+      if (password === "admin123") {
+        const panel = document.getElementById("adminPanel");
+        panel.style.display = "block";
+        renderAdmin();
+        panel.scrollIntoView({ behavior: "smooth" });
+      } else {
+        alert("Wrong password! Demo password: admin123");
+      }
+    }
+
+    function updateStats() {
+      document.getElementById("totalCount").innerText = complaints.length;
+
+      document.getElementById("pendingCount").innerText =
+        complaints.filter(item => item.status === "Pending").length;
+
+      document.getElementById("progressCount").innerText =
+        complaints.filter(item => item.status === "In Progress").length;
+
+      document.getElementById("resolvedCount").innerText =
+        complaints.filter(item => item.status === "Resolved").length;
+    }
+
+    renderComplaints();
+    renderAdmin();
+  </script>
+
+</body>
+</html>
